@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+
+        <!-- Bootstrap CSS -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.0.96/css/materialdesignicons.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+            integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="index.css" />
+
+        <title>Product admin</title>
+    </head>
+    <body class="pt-5">
+        <!-- nav -->
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#epicode-navbar"
+                aria-controls="epicode-navbar"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="container">
+                <div class="collapse navbar-collapse" id="epicode-navbar">
+                    <a class="navbar-brand" href="#">Products</a>
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0 nav nav-pills">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">
+                                <i class="mdi mdi-home"></i>
+                                Home
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="product.html">
+                                <i class="mdi mdi-cog"></i>
+                                Admin
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <main>
+            <div class="container">
+                <form id="product-form">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="name">Product Name</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="name"
+                                placeholder="Product Name"
+                            />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="description">Description</label>
+                            <textarea
+                                class="form-control"
+                                id="description"
+                                placeholder="Product Description"
+                            ></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="imageurl">Image URL</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="imageurl"
+                            placeholder="blablabla"
+                            value="https://drop.ndtv.com/TECH/product_database/images/2152017124957PM_635_nokia_3310.jpeg?downsize=*:420&output-quality=80"
+                        />
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="name">Price</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">$</div>
+                                </div>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="price"
+                                    placeholder="Price"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="brand">Brand</label>
+                            <select id="brand" class="form-control">
+                                <option selected>Choose...</option>
+                                <option>Nokia</option>
+                                <option>Apple</option>
+                                <option>Samsung</option>
+                                <option>Google</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        Submit
+                    </button>
+                </form>
+
+                <hr />
+
+                <div class="container">
+                    <div class="row" id="products">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <div
+            class="modal fade"
+            id="editProduct"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="editProductLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editProductLabel">
+                            Modal title
+                        </h5>
+                        <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                        >
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="edit-product-form">
+                            <input type="hidden" id="product_id" />
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="editname">Product Name</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="editname"
+                                        placeholder="Product Name"
+                                    />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="editdescription"
+                                        >Description</label
+                                    >
+                                    <textarea
+                                        class="form-control"
+                                        id="editdescription"
+                                        placeholder="Product Description"
+                                    ></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="editimageurl">Image URL</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="editimageurl"
+                                    placeholder="blablabla"
+                                    value="https://drop.ndtv.com/TECH/product_database/images/2152017124957PM_635_nokia_3310.jpeg?downsize=*:420&output-quality=80"
+                                />
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="editname">Price</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                $
+                                            </div>
+                                        </div>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="editprice"
+                                            placeholder="Price"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="editbrand">Brand</label>
+                                    <select id="editbrand" class="form-control">
+                                        <option selected>Choose...</option>
+                                        <option>Nokia</option>
+                                        <option>Apple</option>
+                                        <option>Samsung</option>
+                                        <option>Google</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                Save
+                            </button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-dismiss="modal"
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script
+            src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+            crossorigin="anonymous"
+        ></script>
+
+        <script src="./index.js"></script>
+        <script src="./backend.js"></script>
+    </body>
+</html>
